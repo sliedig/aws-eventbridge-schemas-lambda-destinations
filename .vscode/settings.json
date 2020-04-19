@@ -1,0 +1,4 @@
+{  
+    "python.autoComplete.extraPaths": ["./order_processing_function"],
+    "python.pythonPath": "/Users/sliedig/.local/share/virtualenvs/ecommerce-QToGBvVR/bin/python"
+}

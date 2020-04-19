@@ -1,0 +1,50 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  ecommerce
+
+  Sample SAM Template for ecommerce
+
+# More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
+Globals:
+  Function:
+    Timeout: 3
+
+Resources:
+  OrderProcessingFunction:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      CodeUri: order_processing_function
+      Handler: order_notification_handler/app.lambda_handler
+      Runtime: python3.8
+      Policies:
+        - SQSSendMessagePolicy:
+            QueueName: inventory
+        - EventBridgePutEventsPolicy:
+            EventBusName: inventory
+      EventInvokeConfig:
+        DestinationConfig:
+          OnSuccess:
+            Type: EventBridge
+            Destination: arn:aws:events:us-west-2:490195310065:event-bus/inventory
+          OnFailure:
+            Type: SQS
+            Destination: arn:aws:sqs:us-west-2:490195310065:inventory
+      Events:
+        HelloWorld:
+          Type: CloudWatchEvent # More info about CloudWatchEvent Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#cloudwatchevent
+          Properties:
+            EventBusName: ecommerce #Uncomment this if your events are not on the 'default' event bus
+            Pattern:
+              source:
+                - com.aws.orders
+              detail-type:
+                - Order Notification
+
+Outputs:
+  OrderProcessingFunction:
+    Description: "Order Processing Lambda Function ARN"
+    Value: !GetAtt OrderProcessingFunction.Arn
+  OrderProcessingFunctionIamRole:
+    Description: "Implicit IAM Role created for Order Processing function"
+    Value: !GetAtt OrderProcessingFunctionRole.Arn

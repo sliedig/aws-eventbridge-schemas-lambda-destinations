@@ -1,0 +1,36 @@
+{
+  "order_id": 1073459984,
+  "shipping_id": "34VB5540K83",
+  "currency": "USD",
+  "created_at": "2019-10-16T16:05:09-04:00",
+  "price": {
+    "total_price": 24.62,
+    "item_price": 18.99,
+    "shipping": 2.99,
+    "taxes": 2.64
+  },
+  "tax_price": 2.64,
+  "product": {
+    "product_id": 788032119674292900,
+    "title": "Encrypt Everything Tshirt",
+    "sku": "encrypt-everything-tshirt",
+    "inventory_id": 23190823132,
+    "size": "medium",
+    "taxable": true,
+    "image_url": "https://img.mystore.test/encrypt-tshirt.jpg",
+    "weight": 200,
+    "weight_unit": "g"
+  },
+  "customer": {
+    "name": "Alejandro Rosalez",
+    "email": "AlejandroRosalez@amazondomains.com",
+    "phone": "+1 604 555 0100"
+  },
+  "shipping_address": {
+    "street": "123 Any Street, Any Town, USA",
+    "city": "Vancouver",
+    "state": "British Columbia",
+    "zip_code": "V6B5M1",
+    "country": "Canada"
+  }
+}
